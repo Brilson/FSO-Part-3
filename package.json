@@ -1,6 +1,8 @@
 {
   "dependencies": {
-    "express": "^4.18.2"
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "morgan": "^1.10.0"
   },
   "name": "fso-part-3",
   "version": "1.0.0",
@@ -14,6 +16,7 @@
   "license": "ISC",
   "description": "",
   "devDependencies": {
+    "@flydotio/dockerfile": "^0.4.9",
     "nodemon": "^3.0.1"
   }
 }

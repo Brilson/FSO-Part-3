@@ -1,7 +1,22 @@
 const express = require('express')
+var morgan = require('morgan')
+const cors = require('cors')
 const app = express()
 
+morgan.token('data', function (req, res) {
+  if (req.body) {
+  return JSON.stringify(req.body)
+  }
+
+  return
+})
+
+app.use(cors())
 app.use(express.json())
+app.use(express.static('dist'))
+app.use(morgan(':method :url :status :res[content-length] - :response-time ms :data'))
+
+
 
 let persons = [
     { 
@@ -73,7 +88,7 @@ app.post('/api/persons/', (request, response) => {
       error: 'information for that person already exists'
     })
   }
-
+  
   const person = {
     name: body.name,
     number: body.number,
@@ -85,7 +100,7 @@ app.post('/api/persons/', (request, response) => {
   response.json(person)
 })
 
-const PORT = 3001
-    app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`)
+const PORT = process.env.PORT || 3001
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`)
 })
